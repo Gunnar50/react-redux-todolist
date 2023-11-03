@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setInput, setNewTask } from "../app/todo/todoSlice";
+import { selectTodos, setInput, setNewTask } from "../app/todo/todoSlice";
 
-function Input() {
+function Input({ setLocalTasks }) {
 	const [message, setMessage] = useState("");
 	const dispatch = useDispatch();
+
+	const handleOnChange = (e) => {
+		const currentMessage = e.target.value;
+		setMessage(currentMessage);
+		dispatch(setInput(currentMessage));
+	};
 
 	const handleKeyDown = (event) => {
 		if (event.key === "Enter") {
@@ -16,8 +22,8 @@ function Input() {
 	return (
 		<div className="add-new">
 			<input
-				onInput={(e) => dispatch(setInput(e.target.value))}
-				onChange={(e) => setMessage(e.target.value)}
+				placeholder="Create a new todo..."
+				onChange={handleOnChange}
 				onKeyDown={handleKeyDown}
 				type="text"
 				className="input-todo"
