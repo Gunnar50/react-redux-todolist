@@ -2,15 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectTodos } from "../app/todo/todoSlice";
 import Todo from "./Todo";
 
-function TodoList() {
-	const dispatch = useDispatch();
-	const todos = useSelector(selectTodos);
-	console.log(todos);
-
+function TodoList({ tasks }) {
 	return (
-		<ul>
-			{todos.map((task) => {
-				return <Todo key={task.id} id={task.id} />;
+		<ul className="todo-list">
+			{tasks.map((task) => {
+				return <Todo key={task.id} {...task} />;
 			})}
 		</ul>
 	);
