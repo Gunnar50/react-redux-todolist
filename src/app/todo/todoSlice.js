@@ -8,13 +8,12 @@ export const todoSlice = createSlice({
 	name: "todos",
 	initialState,
 	reducers: {
-		// take from the local storage and set the todos
 		setTasks: (state, action) => {
 			state.tasks = action.payload;
 		},
 
 		toggleComplete: (state, action) => {
-			const index = state.todos.findIndex((todo) => todo.id === action.payload);
+			const index = state.tasks.findIndex((todo) => todo.id === action.payload);
 			state.tasks[index].completed = !state.tasks[index].completed;
 		},
 
@@ -34,15 +33,31 @@ export const todoSlice = createSlice({
 			state.tasks.push(newTask);
 			state.newInput = "";
 		},
+
+		deleteTask: (state, action) => {
+			const newState = state.tasks.filter((task) => task.id !== action.payload);
+			state.tasks = newState;
+		},
+
+		clearCompleted: (state) => {
+			const newState = state.tasks.filter((task) => !task.completed);
+			state.tasks = newState;
+		},
 	},
 });
 
-export const { setTasks, toggleComplete, setInput, setNewTask } =
-	todoSlice.actions;
+export const {
+	setTasks,
+	toggleComplete,
+	setInput,
+	setNewTask,
+	deleteTask,
+	clearCompleted,
+} = todoSlice.actions;
 
 export const selectTodos = (state) => state.todos.tasks;
-export const selectTaskById = (id) => (state) =>
-	state.todos.tasks.find((task) => task.id === id);
+export const selectTasksLeft = (state) =>
+	state.todos.tasks.filter((task) => !task.completed);
 
 export const selectInput = (state) => state.todos.newInput;
 
