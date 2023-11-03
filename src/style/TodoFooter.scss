@@ -1,0 +1,12 @@
+.todo-footer {
+	background-color: var(--dark-desaturated-blue);
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem;
+	.sort-buttons {
+		display: flex;
+		gap: 10px;
+	}
+}
