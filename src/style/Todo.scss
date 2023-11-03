@@ -1,0 +1,14 @@
+.todo-item {
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid var(--dark-grayish-blue);
+	padding: 1rem;
+
+	.todo-title {
+		padding: 10px;
+		display: flex;
+		flex: 1;
+	}
+}
