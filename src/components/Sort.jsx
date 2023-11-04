@@ -1,24 +1,27 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { clearCompleted } from "../app/todo/todoSlice";
 
-function Sort({ setSort, activeTasks }) {
-	const dispatch = useDispatch();
+function Sort({ setSort, sort }) {
 	const handleSort = (e) => {
-		const sortType = e.target.innerHTML.toLowerCase();
+		const sortType = e.target.innerHTML;
 		setSort(() => ({
-			all: false,
-			active: false,
-			completed: false,
+			All: false,
+			Active: false,
+			Completed: false,
 			[sortType]: true,
 		}));
 	};
 
 	return (
 		<div className="sort-buttons">
-			<button onClick={handleSort}>All</button>
-			<button onClick={handleSort}>Active</button>
-			<button onClick={handleSort}>Completed</button>
+			{Object.entries(sort).map(([key, value]) => (
+				<button
+					key={key}
+					className={value ? "active" : ""}
+					onClick={handleSort}
+				>
+					{key}
+				</button>
+			))}
 		</div>
 	);
 }
