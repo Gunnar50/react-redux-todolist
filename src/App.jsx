@@ -10,9 +10,9 @@ import "./style/App.scss";
 
 function App() {
 	const [sort, setSort] = useState({
-		all: true,
-		active: false,
-		completed: false,
+		All: true,
+		Active: false,
+		Completed: false,
 	});
 
 	const allTasks = useSelector(selectTodos);
@@ -20,9 +20,9 @@ function App() {
 	const activeTasks = allTasks.filter((task) => !task.completed);
 	const completedTasks = allTasks.filter((task) => task.completed);
 
-	const tasks = sort.all
+	const tasks = sort.All
 		? allTasks
-		: sort.active
+		: sort.Active
 		? activeTasks
 		: completedTasks;
 
@@ -32,7 +32,7 @@ function App() {
 			<Input />
 			<div className="todo-container">
 				<TodoList tasks={tasks} />
-				<TodoFooter setSort={setSort} activeTasks={activeTasks} />
+				<TodoFooter setSort={setSort} sort={sort} activeTasks={activeTasks} />
 			</div>
 		</div>
 	);
