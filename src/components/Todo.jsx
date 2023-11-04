@@ -13,7 +13,12 @@ function Todo({ id, name, completed }) {
 	return (
 		<li className={`todo-item${completed ? " completed" : ""}`}>
 			<div className="todo-title" onClick={() => dispatch(toggleComplete(id))}>
-				<input type="checkbox" />
+				<div
+					className="checkbox"
+					role="checkbox"
+					aria-checked={completed}
+					tabIndex="0"
+				></div>
 				<span>{name}</span>
 			</div>
 			<button onClick={handleDelete} className="delete">
